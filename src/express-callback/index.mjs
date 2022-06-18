@@ -8,6 +8,7 @@ function makeExpressCallback (controller) {
 			ip: req.ip,
 			method: req.method,
 			path: req.path,
+			files: req?.files
 		};
 
 		//TODO: Implement an Error Handler

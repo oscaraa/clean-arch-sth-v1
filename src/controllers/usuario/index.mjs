@@ -1,19 +1,22 @@
-import { listarUsuario } from "../../use-cases/usuario/index.mjs";
-import { hacerActualizarUsurio, hacerObtenerUsurio } from "./usuario.mjs";
+import { listarUsuario, editarUsuario, subirFotoPerfil } from "../../use-cases/usuario/index.mjs";
+import { hacerGetUsuario, hacerPatchUsuario, hacerPostUsarioFotoPerfil } from "./usuario.mjs";
 
 
-const actualizarUsuario = hacerActualizarUsurio();
-const obtenerUsuario = hacerObtenerUsurio({ listarUsuario });
+const patchUsuario = hacerPatchUsuario( { editarUsuario } );
+const getUsuario = hacerGetUsuario( { listarUsuario } );
+const postUsuarioFotoPerfil = hacerPostUsarioFotoPerfil( { subirFotoPerfil } );
 
 
 const usuarioController = Object.freeze({
-	actualizarUsuario,
-	obtenerUsuario
+	patchUsuario,
+	getUsuario,
+	postUsuarioFotoPerfil
 });
 
 export default usuarioController;
 
 export {
-	actualizarUsuario,
-	obtenerUsuario
+	patchUsuario,
+	getUsuario,
+	postUsuarioFotoPerfil
 };
