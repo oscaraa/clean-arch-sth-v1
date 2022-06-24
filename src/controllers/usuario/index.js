@@ -1,5 +1,5 @@
-import { listarUsuario, editarUsuario, subirFotoPerfil } from "../../use-cases/usuario/index.mjs";
-import { hacerGetUsuario, hacerPatchUsuario, hacerPostUsarioFotoPerfil } from "./usuario.mjs";
+import { listarUsuario, editarUsuario, subirFotoPerfil } from "../../use-cases/usuario/index.js";
+import { hacerGetUsuario, hacerPatchUsuario, hacerPostUsarioFotoPerfil } from "./usuario.js";
 
 
 const patchUsuario = hacerPatchUsuario( { editarUsuario } );

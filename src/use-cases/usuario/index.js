@@ -1,4 +1,4 @@
-import { hacerListarUsuario, hacerEditarUsuario, hacerSubirFotoPerfil } from "./usuario.mjs";
+import { hacerListarUsuario, hacerEditarUsuario, hacerSubirFotoPerfil } from "./usuario.js";
 
 const listarUsuario = hacerListarUsuario();
 const editarUsuario = hacerEditarUsuario();

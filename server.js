@@ -2,9 +2,7 @@ import { config } from "dotenv";
 import express from "express";
 import fileupload from "express-fileupload"
 import cors from "cors";
-import bodyParser from "body-parser";
-
-import { router } from "./src/routers/index.mjs";
+import { router } from "./src/routers/index.js";
 
 
 // Load environment variables from .env file
@@ -15,9 +13,9 @@ const app = express();
 
 // Middlewares
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(
-	bodyParser.urlencoded({
+	express.urlencoded({
 		extended: true,
 	})
 );

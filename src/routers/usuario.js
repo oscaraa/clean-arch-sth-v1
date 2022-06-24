@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { makeExpressCallback } from "../express-callback/index.mjs";
-import { getUsuario, patchUsuario, postUsuarioFotoPerfil } from "../controllers/usuario/index.mjs";
+import { makeExpressCallback } from "../express-callback/index.js";
+import { getUsuario, patchUsuario, postUsuarioFotoPerfil } from "../controllers/usuario/index.js";
 
 const usuarioRouter = Router();
 
