@@ -1,6 +1,7 @@
 import { hacerListarUsuario, hacerEditarUsuario, hacerSubirFotoPerfil } from "./usuario.js";
+import { usuarioDb } from '../../data-access/index.js';
 
-const listarUsuario = hacerListarUsuario();
+const listarUsuario = hacerListarUsuario({  usuarioDb });
 const editarUsuario = hacerEditarUsuario();
 const subirFotoPerfil = hacerSubirFotoPerfil();
 

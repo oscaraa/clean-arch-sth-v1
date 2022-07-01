@@ -38,11 +38,14 @@ function hacerEditarUsuario({ commentsDb } = {}) {
 }
 
 
-function hacerListarUsuario({ commentsDb } = {}) {
+function hacerListarUsuario({ usuarioDb } = {}) {
 	return async function listaUsuario({ rud } = {}) {
+		
+		const usuario = await usuarioDb.buscaUsuarioPorRud({ rud });
 
+		console.log(usuario);
 		//TODO: Use commentsDb to get from the DB the User
-		return usuarios.find(usuario => usuario.codigo = rud);
+		return usuario
 	};
 }
 
