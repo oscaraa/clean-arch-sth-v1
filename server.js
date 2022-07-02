@@ -3,10 +3,13 @@ import express from "express";
 import fileupload from "express-fileupload"
 import cors from "cors";
 import { router } from "./src/routers/index.js";
-
+import { makeConnection } from './src/data-access/conexion.js';
 
 // Load environment variables from .env file
 config();
+
+// Create Connection to MongoDB
+makeConnection();
 
 // Create Express server
 const app = express();

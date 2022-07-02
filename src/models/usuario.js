@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
-const Usuariochema = Schema({
+const Usuariochema = new Schema({
     rud: {
         type: Number,
         required: true
@@ -19,6 +19,13 @@ const Usuariochema = Schema({
         type: String,
     }
 });
+
+Usuariochema.method('toJSON', function() {
+    const { __v, _id, ...object } = this.toObject();
+    object.id = _id;
+    return object;
+});
+
 
 const Usuario = model('Usuario', Usuariochema);
 
