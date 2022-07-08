@@ -2,10 +2,10 @@ function hacerPatchUsuario( { editarUsuario } = {} ) {
 	return async function patchUsuario( httpRequest ) {
 		try {
 			//TODO: Create a new Usuario object from the request body
-			const rud = httpRequest.params.rud;
+			const id = httpRequest.params.id;
 			const datos = httpRequest.body;
 
-			const usuario = await editarUsuario({ rud, datos });
+			const usuario = await editarUsuario({ id, datos });
 
 			return {
 				statusCode: 200,

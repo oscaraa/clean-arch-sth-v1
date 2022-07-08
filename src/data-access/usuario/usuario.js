@@ -8,15 +8,38 @@ TODO:
 
 export default function hacerUsuarioDb( { Usuario } ) {
     return Object.freeze({
-        buscaUsuarioPorRud
+        buscaUsuarioPorRud,
+        actualizaUsuario,
+        actualizaFoto,
+        buscaUsuarioPorId
     });
 
     async function buscaUsuarioPorRud ( { rud = null } ) {
-
-        if(!rud) return null;
         
         const usuario = await Usuario.findOne({ rud });
         
         return usuario;
+    }
+
+    async function buscaUsuarioPorId ( { id:  _id = null } ) {
+        
+        const usuario = await Usuario.findOne({ _id });
+        
+        return usuario;
+    }
+
+    async function actualizaUsuario ( { _id, datos } ) {
+        
+        const updatedUser = await Usuario.findByIdAndUpdate( _id, datos, { new: true } );
+        
+        return updatedUser
+    }
+
+    async function actualizaFoto ( { id: _id, attributes } ) {
+        const newPath = "";
+
+
+
+        return newPath; 
     }
 }

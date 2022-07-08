@@ -4,11 +4,11 @@ import { getUsuario, patchUsuario, postUsuarioFotoPerfil } from "../controllers/
 
 const usuarioRouter = Router();
 
-usuarioRouter.get("/:rud", makeExpressCallback(getUsuario));
+usuarioRouter.get("/:id", makeExpressCallback(getUsuario));
 
-usuarioRouter.patch("/:rud", makeExpressCallback(patchUsuario));
+usuarioRouter.patch("/:id", makeExpressCallback(patchUsuario));
 
-usuarioRouter.post("/fotoPerfil/:rud", makeExpressCallback(postUsuarioFotoPerfil));
+usuarioRouter.post("/fotoPerfil/:id", makeExpressCallback(postUsuarioFotoPerfil));
 
 export {
 	usuarioRouter

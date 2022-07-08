@@ -20,20 +20,20 @@ let usuarios = [
 ];
 
 
-function hacerEditarUsuario({ commentsDb } = {}) {
-	return async function editarUsuario({ rud, datos }) {
+function hacerEditarUsuario({ usuarioDb } = {}) {
+	return async function editarUsuario({ id: _id = null, datos }) {
+		
+		//TODO: Validate the data
 
-		//TODO: Use commentsDb to update the user in the DB
-		usuarios = usuarios.map(usuario => {
+		if(!_id) throw new Error('You must supply id.');
 
-			if (usuario.rud.toString() === rud)
-				return { ...usuario, ...datos };
-			
+		const user = await usuarioDb.buscaUsuarioPorId({ id: _id})
+		
+        if(!user) throw new Error('User not found.');
 
-			return usuario;
-		});
+        const updatedUser = await usuarioDb.actualizaUsuario( { _id, datos } );
 
-		return usuarios.find(usuario => usuario.codigo = rud);
+        return updatedUser
 	};
 }
 
@@ -41,6 +41,8 @@ function hacerEditarUsuario({ commentsDb } = {}) {
 function hacerListarUsuario({ usuarioDb } = {}) {
 	return async function listaUsuario({ rud } = {}) {
 		
+		if(!rud) throw new Error('You must supply rud.');
+
 		const usuario = await usuarioDb.buscaUsuarioPorRud({ rud });
 
 		console.log(usuario);

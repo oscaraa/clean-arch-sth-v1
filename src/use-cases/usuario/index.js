@@ -2,7 +2,7 @@ import { hacerListarUsuario, hacerEditarUsuario, hacerSubirFotoPerfil } from "./
 import { usuarioDb } from '../../data-access/index.js';
 
 const listarUsuario = hacerListarUsuario({  usuarioDb });
-const editarUsuario = hacerEditarUsuario();
+const editarUsuario = hacerEditarUsuario({ usuarioDb });
 const subirFotoPerfil = hacerSubirFotoPerfil();
 
 const servicioUsuario = Object.freeze({

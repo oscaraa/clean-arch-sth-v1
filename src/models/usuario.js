@@ -4,12 +4,14 @@ const { Schema, model } = mongoose;
 const Usuariochema = new Schema({
     rud: {
         type: Number,
-        required: true
+        required: true,
+        unique: true,
+        min: 40000,
+        max: 9999999
     },
     nombre: {
         type: String,
         required: true,
-        unique: true
     },
     apellido_paterno: {
         type: String,
