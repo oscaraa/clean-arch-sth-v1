@@ -1,5 +1,5 @@
 function makeExpressCallback (controller) {
-	return (req, res) => {
+	return (req, res, next) => {
 
 		const httpRequest = {
 			body: req.body,
@@ -13,9 +13,12 @@ function makeExpressCallback (controller) {
 
 		//TODO: Implement an Error Handler
 
-		controller(httpRequest)
+		controller(httpRequest, next)
 			.then(httpResponse => res.status(httpResponse.statusCode).json(httpResponse.body) )
-			.catch(e => res.status(500).send({ error: "An unkown error occurred." }));
+			.catch(e => {
+				console.log('error: ', e);
+				return res.status(500).send({ error: "An unkown error occurred." })
+			});
 	};
 }
   

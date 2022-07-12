@@ -10,6 +10,8 @@ usuarioRouter.patch("/:id", makeExpressCallback(patchUsuario));
 
 usuarioRouter.post("/fotoPerfil/:id", makeExpressCallback(postUsuarioFotoPerfil));
 
+
+
 export {
 	usuarioRouter
 };

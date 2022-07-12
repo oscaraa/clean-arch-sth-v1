@@ -1,5 +1,5 @@
 function hacerPatchUsuario( { editarUsuario } = {} ) {
-	return async function patchUsuario( httpRequest ) {
+	return async function patchUsuario( httpRequest, next ) {
 		try {
 			//TODO: Create a new Usuario object from the request body
 			const id = httpRequest.params.id;
@@ -13,7 +13,7 @@ function hacerPatchUsuario( { editarUsuario } = {} ) {
 			};
 
 		} catch (error) {
-			console.log(error);
+			next(error);
 
 		}
 
@@ -21,10 +21,11 @@ function hacerPatchUsuario( { editarUsuario } = {} ) {
 }
 
 function hacerGetUsuario({ listarUsuario } = {}) {
-	return async function getUsuario( httpRequest ) {
+	return async function getUsuario( httpRequest, next ) {
 
 		try {
-			const usuario = await listarUsuario({ rud: httpRequest.params.rud });
+			
+			const usuario = await listarUsuario({ id: httpRequest.params.id });
 			
 			return {
 				statusCode: 200,
@@ -32,7 +33,8 @@ function hacerGetUsuario({ listarUsuario } = {}) {
 			};
 			
 		} catch (error) {
-			console.log(error);
+			console.log('entre');
+			next(error);
 
 		}
 		

@@ -7,7 +7,7 @@ const Usuariochema = new Schema({
         required: true,
         unique: true,
         min: 40000,
-        max: 9999999
+        max: 9999999,
     },
     nombre: {
         type: String,
