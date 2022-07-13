@@ -1,18 +1,21 @@
 import { Router } from "express";
 import { usuarioRouter } from "./usuario.js";
-import { isTrustedError, handleError } from "../util/error/errorHandler.js"
+import { isTrustedError, handleError, saveError } from "../util/error/index.js"
+
+const handlerProgramerError = handleError( { saveError } )
 
 const router = Router();
 
 router.use("/api/usuario", usuarioRouter);
 
 router.use(async (err, req, res, next) => {
-	console.log('entre al error handler');
 	if (!isTrustedError(err)) {
-		console.log('fsdfsdfdsfdsd ees');
 	  next(err);
 	}
-	await handleError(err);
+	await handlerProgramerError(err);
+
+	//TODO: FIGURE OUT IF I HAVE TO RESPOND WITH NEXT OR NOT
+	next(err);
 });
 
 export {
