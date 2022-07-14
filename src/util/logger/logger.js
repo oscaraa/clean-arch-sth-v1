@@ -12,35 +12,45 @@ import {
 import { customLevels } from './customLevels.js';
 
 
-const formatter = format.combine(
+const formatterConsole = format.combine(
     format.colorize(),
     format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
     format.splat(),
-    format.printf((info) => {
+    format.printf((info) =>{
         const { timestamp, level, message, ...meta } = info;
-
+        
         return `${timestamp} [${level}]: ${message} ${Object.keys(meta).length ? JSON.stringify(meta, null, 2) : '' }`;
     }),
 );
 
+const formatterFile = format.combine(
+    format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+    format.printf((info) => {
+        const { timestamp, level, message, ...meta } = info;
+        
+        return JSON.stringify({ timestamp, message:  message.toString(), meta: Object.keys(meta).length ? meta : '' });
+    }),
+);
+
+
 const prodTransport = new transports.File({
     filename: 'logs/errors.log',
     level: 'error',
-    format: format.json()
+    format: formatterFile
 });
 
 const transport = new transports.Console({
-    format: formatter,
+    format: formatterConsole,
 });
 
 class Logger {
 
     constructor() {
+    
+        const typeTransport = !process.env.NODE_ENV ? [prodTransport] : [transport];
         
-        const typeTransport = !process.env.NODE_ENV === "production" ? [prodTransport, transport] : [transport];
-
         this.logger = createLogger({
-            level: !process.env.NODE_ENV ? 'trace' : 'error',
+            level: !process.env.NODE_ENV ? 'error' : 'trace',
             levels: customLevels.levels,
             transports: typeTransport,
         });

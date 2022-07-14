@@ -9,9 +9,9 @@ import { APIError } from './error.js'
     [ ] Has it to respond?
 */
 export const handleError =  ( { saveError } ) =>  {
-  return async ( error ) => {
-    logger.error(error);
-    await saveError(error);
+  return async ( error, { url, method, paramas, body, query } ) => {
+      logger.error(error, { url, method, paramas, body, query });
+      await saveError(error);
   }
 }
 
