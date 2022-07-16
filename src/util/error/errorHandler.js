@@ -12,11 +12,13 @@ export const handleError =  ( { saveError } ) =>  {
   return async ( error, { url, method, paramas, body, query } ) => {
       logger.error(error, { url, method, paramas, body, query });
       await saveError(error);
+
+      
+      
   }
 }
 
 export const isTrustedError = ( error ) =>  {
-
   if (error instanceof APIError) return error.isOperational;
   
   return false;

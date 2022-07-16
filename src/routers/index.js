@@ -10,13 +10,13 @@ router.use("/api/usuario", usuarioRouter);
 
 router.use(async (err, req, res, next) => {
 	
-	if (!isTrustedError(err)) {
-	  next(err);
+	if (isTrustedError(err)) {
+		// return { statusCode: err.st⁄atusCode, body: { error: err.message } };
+		// err.body = { error: err.message }
+		return { statusCode: err.statusCode, body: { error: err.message } };
 	}
 	await handlerProgramerError(err, { url: req.url, method: req.method, paramas: req.params, body: req.body, query: req.query });
-
-	//TODO: FIGURE OUT IF I HAVE TO RESPOND WITH NEXT OR NOT
-	next(err);
+	return { statusCode: 500, body: { error: "An unkown error occurred." } };
 });
 
 export {

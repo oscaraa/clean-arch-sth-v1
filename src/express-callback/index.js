@@ -1,6 +1,6 @@
 function makeExpressCallback (controller) {
 	return (req, res, next) => {
-
+		
 		const httpRequest = {
 			body: req.body,
 			query: req.query,
@@ -11,13 +11,14 @@ function makeExpressCallback (controller) {
 			files: req?.files
 		};
 
-		//TODO: Implement an Error Handler
-
-		controller(httpRequest, next)
-			.then(httpResponse => res.status(httpResponse.statusCode).json(httpResponse.body) )
+		controller(httpRequest, res, next)
+			.then(httpResponse => { 
+				console.log(httpResponse);
+				return res.status(httpResponse.statusCode).json(httpResponse.body)
+			})
 			.catch(e => {
-				console.log('error: ', e);
-				return res.status(500).send({ error: "An unkown error occurred." })
+				console.log(e);
+				return res.status(500).send({ error: "An unkown error occurred." }) 
 			});
 	};
 }

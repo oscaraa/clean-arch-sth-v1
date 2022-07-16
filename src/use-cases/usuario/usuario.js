@@ -41,10 +41,8 @@ function hacerEditarUsuario({ usuarioDb } = {}) {
 function hacerListarUsuario({ usuarioDb, APIError } = {}) {
 	return async function listaUsuario({ id } = {}) {
 		
-		let e = id.jola;
-		e()
 		id= null
-		if(!id) throw new APIError( 'NOT FOUND', true, 'You must supply rud.' );
+		if(!id) throw new APIError( 'NOT_FOUND', true, 'You must supply rud.' );
 
 		const usuario = await usuarioDb.buscaUsuarioPorId({ id });
 

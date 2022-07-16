@@ -33,7 +33,7 @@ function hacerGetUsuario({ listarUsuario } = {}) {
 			};
 			
 		} catch (error) {
-			console.log('entre');
+			
 			next(error);
 
 		}

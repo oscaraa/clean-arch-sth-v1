@@ -2,13 +2,13 @@ import { httpStatusCode } from '../httpStatusCode.js';
 
 class BaseError extends Error {
 
-  constructor(name, description, isOperational) {
+  constructor(name, statusCode, isOperational, description) {
     super(description);
     Object.setPrototypeOf(this, new.target.prototype);
-
+  
     this.name = name;
     this.isOperational = isOperational;
-
+    this.statusCode = statusCode;
     Error.captureStackTrace(this);
   }
 }
