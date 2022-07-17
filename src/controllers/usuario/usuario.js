@@ -13,7 +13,7 @@ function hacerPatchUsuario( { editarUsuario } = {} ) {
 			};
 
 		} catch (error) {
-			next(error);
+			throw error;
 
 		}
 

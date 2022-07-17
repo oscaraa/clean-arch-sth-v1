@@ -1,25 +1,15 @@
-import { logger } from '../logger/index.js';
-import { APIError } from './error.js'
 
-
-/*
-  TODO:
-  - Create a CLOSURE to handle the error
-    [ ] It's gonna recieve the functions to log either file or db the error
-    [ ] Has it to respond?
-*/
-export const handleError =  ( { saveError } ) =>  {
-  return async ( error, { url, method, paramas, body, query } ) => {
-      logger.error(error, { url, method, paramas, body, query });
-      await saveError(error);
-
+export const errorHandler = ( { logError, isTrustedError } ) =>  {
+  return (err, req, res) => {
+      if (isTrustedError(err)) {
+        console.log('aaaa');
+    		// return { statusCode: err.statusCode, body: { error: err.message } };
+        return res.status(500).send({ error:  err.message }) 
+    	}
       
+      logError(err, { url: req.url, method: req.method, params: req.params, body: req.body, query: req.query });
       
+     return res.status(500).send({ error: "An unkown error occurred." }) 
+
   }
-}
-
-export const isTrustedError = ( error ) =>  {
-  if (error instanceof APIError) return error.isOperational;
-  
-  return false;
-}
+};

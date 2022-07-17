@@ -1,3 +1,5 @@
+import e from "express";
+
 let usuarios = [
 	{
 		rud: 2019146,
@@ -41,7 +43,9 @@ function hacerEditarUsuario({ usuarioDb } = {}) {
 function hacerListarUsuario({ usuarioDb, APIError } = {}) {
 	return async function listaUsuario({ id } = {}) {
 		
-		id= null
+		// e = id.prueba;
+		// e()
+		// id= null
 		if(!id) throw new APIError( 'NOT_FOUND', true, 'You must supply rud.' );
 
 		const usuario = await usuarioDb.buscaUsuarioPorId({ id });
